@@ -1,48 +1,39 @@
 # Tidy dataset
-The run_analysis.R script prepares the data and created 2 datasets based on the 5 steps described in Readme.txt on the Getting and Cleaning Data Course Project of Coursera.
-A.	Preparing data:
--	Download the dataset under the folder called UCI HAR Dataset
--	Reading data into R and assign each data to variables
-features <- features.txt : 561 rows, 2 columns 
-The features selected for this database come from the accelerometer and gyroscope 3-axial raw signals tAcc-XYZ and tGyro-XYZ.
-activities <- activity_labels.txt : 6 rows, 2 columns 
-List of activities performed when the corresponding measurements were taken and its codes (labels)
-subject_test <- test/subject_test.txt : 2947 rows, 1 column 
-contains test data of 9/30 volunteer test subjects being observed
-x_test <- test/X_test.txt : 2947 rows, 561 columns 
-contains recorded features test data
-y_test <- test/y_test.txt : 2947 rows, 1 columns 
-contains test data of activities’code labels
-subject_train <- test/subject_train.txt : 7352 rows, 1 column 
-contains train data of 21/30 volunteer subjects being observed
-x_train <- test/X_train.txt : 7352 rows, 561 columns 
-contains recorded features train data
-y_train <- test/y_train.txt : 7352 rows, 1 columns 
-contains train data of activities’code labels
+The run_analysis.R script prepares the data and created 2 datasets based on the following steps:
+A.Preparing data was done by downloading the dataset and reading data(8 datasets) into 8 data frames as following:
+features <- features.txt - The features are from the accelerometer and gyroscope 3-axial raw signals tAcc-XYZ and tGyro-XYZ.
+activities <- activity_labels.txt -List of activities 
+subject_test <- test/subject_test.txt - includes 9 out of 30 volunteer subjects 
+x_test <- test/X_test.txt - includes recorded features test data
+y_test <- test/y_test.txt - includes test data of activities’code labels
+subject_train <- test/subject_train.txt - includes train data of 21 out of 30 volunteer subjects 
+x_train <- test/X_train.txt - includes recorded features train data
+y_train <- test/y_train.txt - includes train data of activities’code labels
 
-1.	Merging the training and the test sets to create one data set.
-X (10299 rows, 561 columns) : created ed by merging x_train and x_test using rbind() function
-Y (10299 rows, 1 column) : created by merging y_train and y_test using rbind() function
-Subject (10299 rows, 1 column) : created by merging subject_train and subject_test using rbind() function
-XY_merge (10299 rows, 563 column) : created by merging Subject, Y and X using cbind() function
+B. Analysing the data
+1. Merging the training and the test sets to create one data set.
+X : created by merging x_train and x_test using rbind() function
+Y : created by merging y_train and y_test using rbind() function
+Subject: created by merging subject_train and subject_test using rbind() function
+XY_merge: created by merging Subject, Y and X using cbind() function
 
 2. Extracting only the measurements on the mean and standard deviation for each measurement
-            TidyData (10299 rows, 88 columns): created by subsetting XY_merge, including only columns:  subject, code and the measurements on the mean and standard deviation for each measurement
+   TidyData: created by subsetting XY_merge, selecting:  subject, code and the measurements on the mean and standard deviation for each measurement
 
-3.	Using descriptive activity names to name the activities in the data set
-Entire numbers in code column of the TidyData replaced with corresponding activity taken from second column of the activities variable
+3. Using descriptive activity names to name the activities in the data set
+   Entire numbers in code column of the TidyData replaced with corresponding activity taken from second column of the activities variable
 
-4.	Creating appropriately labels the data set with descriptive variable names.
-code column in TidyData renamed into activities
-All Acc in column’s name replaced by Accelerometer
-All Gyro in column’s name replaced by Gyroscope
-All BodyBody in column’s name replaced by Body
-All Mag in column’s name replaced by Magnitude
-All start with character f in column’s name replaced by Frequency
-All start with character t in column’s name replaced by Time
+4. Creating appropriately labels the data set with descriptive variable names.
+   code column in TidyData renamed into activities
+   Acc renamed into Accelerometer
+   Gyro renamed into Gyroscope
+   BodyBody renamed into Body
+   Mag renamed into Magnitude
+   All start with character f renamed into Frequency
+   All start with character t renamed into Time
 
-5.	Creating a second, independent tidy data set with the average of each variable for each activity and each subject from step4
-MyData (180 rows, 88 columns) is created by sumarizing TidyData taking the means of each variable for each activity and each subject, after groupped by subject and activity.
+5. Creating a second, independent tidy data set with the average of each variable for each activity and each subject from step4
+MyData- created by grouping by the data on subject and activity and then sumarizing with taking the means.
 
 - Create MyData.txt (a txt file) using write.table() using row.name=FALSE  
 
